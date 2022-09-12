@@ -1,0 +1,65 @@
+{% extends 'weather/base.html' %}
+
+{% block header %}
+<header>
+    <div class="head">
+        <span>What's the weather like?</span>
+        {% if request.user.is_authenticated %}
+        <ul>
+            <li><a class="btn btn-primary" href="#">{{ request.user.username}}</a></li>
+            <li><a class="btn btn-warning" href="{% url 'logout_user' %}">Logout</a></li>
+        </ul>
+        {% else %}
+        <ul>
+            <li><a class="btn btn-primary" href="{% url 'sign_up_user' %}">Sign up</a></li>
+            <li><a class="btn btn-warning" href="{% url 'login_user' %}">Login</a></li>
+        </ul>
+        {% endif %}
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <div class="city_weather">
+            <h3>{{ error }}</h3>
+            <form method="post" action="{% url 'start_page' %}">
+                {% csrf_token %}
+                {{ form.name }}
+                <button class="btn btn-primary" type="submit">Add city</button>
+            </form>
+            <br>
+            {% for x in cities %}
+                <div class="card mb-3" style="max-width: 100%;">
+                  <div class="row g-0">
+                    <div class="col-md-4" style="text-align: center; line-height: 125px;">
+                        <img src="http://openweathermap.org/img/w/{{ x.icon }}.png" alt="Image" style="width:75px; height:75px; line-height: 100px;">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                          <div class="delete" style="float: right;">
+                                  <a href="{% url 'delete_city' x.city %}">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                      </svg>
+                                  </a>
+                          </div>
+                        <span class="card-title">
+                            <span style="font-size: 28px;">
+                                {{ x.city }}
+                            </span>
+                            <span style="font-size: 14px;"><br>{{ x.temprature }}°C<br><small class="text-muted">{{ x.weather}}</small></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="content" style="width: 80%; margin: 0 auto;">
+            <h4 class="alert alert-warning">Firstly you must sign up or login </h4>
+        </div>
+    {% endif %}
+{% endblock %}
