@@ -121,7 +121,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 try:
-    from local_settings import *
+    from .local_settings import *
 except ImportError:
     print("Looks like no local_settings.py. You must be on production!")
 # Default primary key field type
