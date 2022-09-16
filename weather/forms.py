@@ -11,8 +11,8 @@ class AddCityForm(forms.ModelForm):
 
 class SignUpForm(UserCreationForm):
     username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'User name'}))
-    password1 = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Password'}))
-    password2 = forms.CharField(max_length=100,  widget=forms.TextInput(attrs={'placeholder': 'Confirm password'}))
+    password1 = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    password2 = forms.CharField(max_length=100,  widget=forms.PasswordInput(attrs={'placeholder': 'Confirm password'}))
 
     class Meta:
         model = User
@@ -20,7 +20,7 @@ class SignUpForm(UserCreationForm):
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'User name'}))
-    password = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Password'}))
+    password = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
 
     class Meta:
         model = User
