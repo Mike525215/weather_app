@@ -1,0 +1,36 @@
+
+
+<div class="wrapper" style="display: flex; justify-content: center; align-items: end;">
+    <form action="{% url 'cards' %}" method="get">
+        <input name="city" placeholder="Input name of city..." aria-label="Search" style="background: #fff; width: 42rem; height: 50px; border-radius: 25px;">
+        <button class="btn btn-outline-success" type="submit" style="border-radius: 25px; width: 100px;">Check</button>
+    </form>
+</div>
+<br>
+<div class="lst_cities" style="width: 35rem; margin: 0 auto;">
+    {% if message %}
+        <h5 class="alert alert-danger" style="text-align: center; left: -17px; border-radius: 25px;">{{ message }}</h5>
+    {% endif %}
+    {% for x in weathers %}
+        <div class="card" style="width: 32rem; border-radius: 25px;">
+          <div class="card-body">
+              <form action="{% url 'delete_card' %}" method="get">
+                  <input type="hidden" name="city_name" value="{{ x.name }}">
+                  <button type="submit" style="border:none; outline:none; background: #fff;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" color="red" class="bi bi-x-circle" viewBox="0 0 16 16">
+                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                      </svg>
+                  </button>
+              </form>
+              <h3 class="card-title" style="text-align: center;">{{ x.name }}</h3>
+                  <img src="{{ x.icon }}" alt="" style="float: right; width: 75px; height: 75px;">
+              <h6 class="card-text">Temperature: {{ x.temp }}ºC</h6>
+              <h6 class="card-text">Min - Max: {{ x.temp_min }}ºC - {{ x.temp_max }}ºC</h6>
+              <h6 class="card-text">Feels like: {{ x.feels_like }}ºC</h6>
+              <h6 class="card-text">{{ x.description }}</h6>
+          </div>
+        </div>
+        <br>
+    {% endfor %}
+</div>

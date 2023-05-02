@@ -1,0 +1,36 @@
+{% extends 'weatherApp/base.html' %}
+{% block wrapper %}
+
+<br>
+<br>
+    <div class="wrapper" style="display: flex; justify-content: center; width: 40%; margin: 0 auto;">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body" style="text-align: center;">
+              <form action="{% url 'sign_up' %}" method="post">
+                  {% csrf_token %}
+                  <h4>Sign Up form</h4>
+                  <br>
+                  {{ form.username }}
+                  <br>
+                  {% for error in form.username.errors %}
+                  <br><p class="alert alert-danger">{{ error }}</p>
+                  {% endfor %}
+                  <br>
+                  {{ form.password1 }}
+                  <br>
+                  {% for error in form.password1.errors %}
+                  <br><p class="alert alert-danger">{{ error }}</p>
+                  {% endfor %}
+                  <br>
+                  {{ form.password2}}
+                  <br>
+                  {% for error in form.password2.errors %}
+                  <br><p class="alert alert-danger">{{ error }}</p>
+                  {% endfor %}
+                  <br>
+                  <button type="submit" class="btn btn-warning">Sign Up</button>
+              </form>
+          </div>
+        </div>
+    </div>
+{% endblock %}

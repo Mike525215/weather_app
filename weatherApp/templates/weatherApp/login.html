@@ -1,0 +1,18 @@
+{% extends 'weatherApp/base.html' %}
+{% block wrapper %}
+
+<br>
+<br>
+    <div class="wrapper" style="display: flex; justify-content: center; width: 40%; margin: 0 auto;">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body" style="text-align: center;">
+              <form action="{% url 'login' %}" method="post">
+                  {% csrf_token %}
+                  <h4>Login form</h4>
+                  {{ form }}
+                  <button type="submit" class="btn btn-warning">Login</button>
+              </form>
+          </div>
+        </div>
+    </div>
+{% endblock %}

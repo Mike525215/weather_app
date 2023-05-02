@@ -1,0 +1,22 @@
+{% extends 'weatherApp/base.html' %}
+{% block header %}
+    <header style="text-align: center; display: flex; justify-content: center; align-items: end; height: 30vh; width: 50%; margin: 0 auto;">
+        <h2 style="color: #fff;">Firsly, you have to Sign Up, if you haven't got an account, or Login if you have already signed up an account</h2>
+    </header>
+<br>
+<br>
+{% endblock %}
+
+{% block wrapper %}
+    <div class="wrapper" style="display: flex; justify-content: center; align-items: stretch; height: 60vh;">
+        <ul style="display: flex;">
+            <li style="display: inline-block;">
+                <a href="{% url 'sign_up' %}" class="btn btn-primary" style="width: 160px; height: 35px; border-radius: 25px;">Sign Up</a>
+            </li>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li style="display: inline-block;">
+                <a href="{% url 'login' %}" class="btn btn-warning" style="width: 160px; height: 35px; border-radius: 25px;">Login</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
